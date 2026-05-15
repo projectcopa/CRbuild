@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CVCraft Pro — AI-Powered Resume Builder</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ===== NAVIGATION ===== -->
+<nav class="navbar" id="navbar">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo" onclick="showPage('home')">
+      <span class="logo-icon">◈</span>
+      <span>CVCraft<em>Pro</em></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#" onclick="showPage('home')" class="nav-link active" data-page="home">Home</a></li>
+      <li><a href="#" onclick="showPage('trending')" class="nav-link" data-page="trending">Trending</a></li>
+      <li><a href="#" onclick="showPage('special')" class="nav-link" data-page="special">Special</a></li>
+      <li><a href="#" onclick="showPage('about')" class="nav-link" data-page="about">About</a></li>
+      <li><a href="#" onclick="showPage('contact')" class="nav-link" data-page="contact">Contact</a></li>
+    </ul>
+    <button class="nav-cta" onclick="showPage('home')">Build Free CV</button>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ===== MOBILE MENU ===== -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#" onclick="showPage('home');toggleMenu()">Home</a>
+  <a href="#" onclick="showPage('trending');toggleMenu()">Trending</a>
+  <a href="#" onclick="showPage('special');toggleMenu()">Special</a>
+  <a href="#" onclick="showPage('about');toggleMenu()">About</a>
+  <a href="#" onclick="showPage('contact');toggleMenu()">Contact</a>
+</div>
+
+<!-- ===== PAGE: HOME ===== -->
+<div id="page-home" class="page active">
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-bg">
+      <div class="hero-orb orb-1"></div>
+      <div class="hero-orb orb-2"></div>
+      <div class="hero-orb orb-3"></div>
+      <div class="hero-grid"></div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-badge">✦ AI-Powered · Free · Instant Download</div>
+      <h1 class="hero-title">
+        Build a CV That<br>
+        <em>Gets You Hired</em>
+      </h1>
+      <p class="hero-subtitle">
+        Choose from 20+ premium templates. Fill your details. Let AI craft professional content.
+        Download in seconds — PDF or DOCX, perfectly formatted.
+      </p>
+      <div class="hero-actions">
+        <button class="btn-primary" onclick="document.getElementById('templates-section').scrollIntoView({behavior:'smooth'})">
+          Browse Templates →
+        </button>
+        <button class="btn-ghost" onclick="openEditor('modern-executive')">
+          Quick Start
+        </button>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><strong>20+</strong><span>Templates</span></div>
+        <div class="stat-divider"></div>
+        <div class="stat"><strong>AI</strong><span>Content Help</span></div>
+        <div class="stat-divider"></div>
+        <div class="stat"><strong>PDF</strong><span>Instant Export</span></div>
+        <div class="stat-divider"></div>
+        <div class="stat"><strong>Free</strong><span>Always</span></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="cv-preview-card">
+        <div class="cv-card-header">
+          <div class="cv-card-avatar"></div>
+          <div class="cv-card-info">
+            <div class="cv-card-name">Alexandra Chen</div>
+            <div class="cv-card-role">Senior Product Designer</div>
+          </div>
+        </div>
+        <div class="cv-card-section">
+          <div class="cv-section-label">Experience</div>
+          <div class="cv-line long"></div>
+          <div class="cv-line medium"></div>
+          <div class="cv-line short"></div>
+        </div>
+        <div class="cv-card-section">
+          <div class="cv-section-label">Skills</div>
+          <div class="cv-skills-row">
+            <div class="cv-skill-tag">Figma</div>
+            <div class="cv-skill-tag">React</div>
+            <div class="cv-skill-tag">AI/UX</div>
+          </div>
+        </div>
+        <div class="cv-card-badge">✓ AI Optimized</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Templates Section -->
+  <section class="templates-section" id="templates-section">
+    <div class="section-header">
+      <div class="section-eyebrow">Choose Your Style</div>
+      <h2>Premium CV & Resume Templates</h2>
+      <p>Every template is A4-optimized, ATS-friendly, and designed by professionals</p>
+    </div>
+
+    <!-- Filter Tabs -->
+    <div class="filter-tabs">
+      <button class="filter-btn active" onclick="filterTemplates('all', this)">All Templates</button>
+      <button class="filter-btn" onclick="filterTemplates('cv', this)">CV</button>
+      <button class="filter-btn" onclick="filterTemplates('resume', this)">Resume</button>
+      <button class="filter-btn" onclick="filterTemplates('fresher', this)">Fresher</button>
+      <button class="filter-btn" onclick="filterTemplates('professional', this)">Professional</button>
+      <button class="filter-btn" onclick="filterTemplates('bio', this)">Bio-Data</button>
+    </div>
+
+    <!-- Template Grid -->
+    <div class="template-grid" id="templateGrid"></div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features-section">
+    <div class="section-header">
+      <div class="section-eyebrow">Why CVCraft Pro</div>
+      <h2>Everything You Need to Land the Job</h2>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">⚡</div>
+        <h3>Real-Time Preview</h3>
+        <p>See every change instantly. What you type is what you get — no surprises at download.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🤖</div>
+        <h3>AI Writing Assistant</h3>
+        <p>Stuck on wording? Our AI generates professional career objectives, skill descriptions, and more.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📄</div>
+        <h3>PDF & DOCX Export</h3>
+        <p>Download in multiple formats. A4 optimized, print-ready, high-resolution every time.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🎨</div>
+        <h3>Full Customization</h3>
+        <p>Colors, fonts, spacing, layouts — every detail is in your hands. Make it truly yours.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">💾</div>
+        <h3>Auto-Save</h3>
+        <p>Never lose your work. Your CV data saves automatically and syncs across templates.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">♾️</div>
+        <h3>Switch Templates</h3>
+        <p>Try different designs without re-entering data. Your content travels with you.</p>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ===== PAGE: TRENDING ===== -->
+<div id="page-trending" class="page">
+  <section class="inner-page-hero">
+    <div class="section-eyebrow">🔥 Most Popular</div>
+    <h1>Trending Templates</h1>
+    <p>The templates our users love most right now</p>
+  </section>
+  <div class="template-grid" id="trendingGrid"></div>
+</div>
+
+<!-- ===== PAGE: SPECIAL ===== -->
+<div id="page-special" class="page">
+  <section class="inner-page-hero">
+    <div class="section-eyebrow">✨ Exclusive</div>
+    <h1>Special Templates</h1>
+    <p>Unique designs for standout applications</p>
+  </section>
+  <div class="template-grid" id="specialGrid"></div>
+</div>
+
+<!-- ===== PAGE: ABOUT ===== -->
+<div id="page-about" class="page">
+  <section class="about-section">
+    <div class="about-content">
+      <div class="section-eyebrow">Our Story</div>
+      <h1>Built by Job Seekers,<br>for Job Seekers</h1>
+      <p>CVCraft Pro was born from frustration — clunky, expensive resume tools that produced mediocre results. We set out to build something different: a beautiful, AI-powered platform that anyone can use for free.</p>
+      <p>Our templates are crafted by professional designers and optimized by career experts. Every layout is ATS-tested, A4-perfect, and designed to make hiring managers stop scrolling.</p>
+      <div class="about-stats">
+        <div class="about-stat"><strong>50K+</strong><span>CVs Created</span></div>
+        <div class="about-stat"><strong>20+</strong><span>Templates</span></div>
+        <div class="about-stat"><strong>98%</strong><span>Satisfaction</span></div>
+      </div>
+    </div>
+    <div class="about-visual">
+      <div class="about-card">
+        <div class="about-card-icon">◈</div>
+        <h3>Our Mission</h3>
+        <p>Democratize professional CV creation so every candidate has an equal shot at their dream job.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ===== PAGE: CONTACT ===== -->
+<div id="page-contact" class="page">
+  <section class="contact-section">
+    <div class="section-eyebrow">Get In Touch</div>
+    <h1>We'd Love to Hear From You</h1>
+    <p>Questions, feedback, or partnership inquiries — drop us a line.</p>
+    <div class="contact-form">
+      <div class="form-row">
+        <input type="text" placeholder="Your Name" class="contact-input">
+        <input type="email" placeholder="Your Email" class="contact-input">
+      </div>
+      <input type="text" placeholder="Subject" class="contact-input full">
+      <textarea placeholder="Your message..." class="contact-textarea"></textarea>
+      <button class="btn-primary" onclick="alert('Message sent! We\'ll respond within 24 hours.')">Send Message →</button>
+    </div>
+  </section>
+</div>
+
+<!-- ===== EDITOR MODAL ===== -->
+<div id="editorModal" class="editor-modal">
+  <div class="editor-container">
+
+    <!-- Editor Header -->
+    <div class="editor-header">
+      <div class="editor-header-left">
+        <button class="back-btn" onclick="closeEditor()">← Back</button>
+        <span class="editor-template-name" id="editorTemplateName">Modern Executive</span>
+      </div>
+      <div class="editor-header-center">
+        <div class="template-switcher">
+          <button class="ts-btn active" onclick="switchEditorView('editor')">✏ Edit</button>
+          <button class="ts-btn" onclick="switchEditorView('preview')">👁 Preview</button>
+        </div>
+      </div>
+      <div class="editor-header-right">
+        <button class="btn-ghost-sm" onclick="triggerAI()">🤖 AI Assist</button>
+        <button class="btn-ghost-sm" onclick="autoSave()">💾 Save</button>
+        <div class="download-dropdown">
+          <button class="btn-primary-sm" onclick="toggleDownloadMenu()">⬇ Download ▾</button>
+          <div class="download-menu" id="downloadMenu">
+            <button onclick="downloadCV('pdf')">📄 Download PDF</button>
+            <button onclick="downloadCV('docx')">📝 Download DOCX</button>
+            <button onclick="printCV()">🖨 Print</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Editor Body -->
+    <div class="editor-body">
+
+      <!-- LEFT PANEL: Form -->
+      <div class="editor-left" id="editorLeft">
+
+        <!-- Customization Bar -->
+        <div class="custom-bar">
+          <div class="custom-section">
+            <label>Color</label>
+            <div class="color-palettes" id="colorPalettes"></div>
+          </div>
+          <div class="custom-section">
+            <label>Font</label>
+            <select id="fontPicker" onchange="applyFont(this.value)" class="mini-select">
+              <option value="'Playfair Display', serif">Playfair</option>
+              <option value="'DM Sans', sans-serif">DM Sans</option>
+              <option value="Georgia, serif">Georgia</option>
+              <option value="'Courier New', monospace">Courier</option>
+              <option value="Verdana, sans-serif">Verdana</option>
+            </select>
+          </div>
+          <div class="custom-section">
+            <label>Size</label>
+            <input type="range" min="10" max="14" value="11" class="mini-range" id="fontSizeRange" oninput="applyFontSize(this.value)">
+          </div>
+          <div class="custom-section">
+            <label>Theme</label>
+            <select id="themePicker" onchange="applyTheme(this.value)" class="mini-select">
+              <option value="light">Light</option>
+              <option value="dark">Dark</option>
+              <option value="glass">Glass</option>
+            </select>
+          </div>
+          <div class="custom-section">
+            <label>Layout</label>
+            <select id="layoutPicker" onchange="applyLayout(this.value)" class="mini-select">
+              <option value="sidebar">Sidebar</option>
+              <option value="classic">Classic</option>
+              <option value="modern">Modern</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Form Sections -->
+        <div class="form-sections" id="formSections">
+
+          <!-- Personal Info -->
+          <div class="form-group" data-section="personal">
+            <div class="form-group-header">
+              <span>👤 Personal Information</span>
+              <button class="toggle-section-btn" onclick="toggleSection('personal')">−</button>
+            </div>
+            <div class="form-group-body" id="section-personal">
+              <div class="form-row">
+                <div class="field-wrap">
+                  <label>Full Name *</label>
+                  <input type="text" id="f-name" placeholder="Alexandra Chen" oninput="updatePreview()" class="form-input">
+                </div>
+                <div class="field-wrap">
+                  <label>Job Title *</label>
+                  <input type="text" id="f-title" placeholder="Senior Product Designer" oninput="updatePreview()" class="form-input">
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="field-wrap">
+                  <label>Email</label>
+                  <input type="email" id="f-email" placeholder="alex@example.com" oninput="updatePreview()" class="form-input">
+                </div>
+                <div class="field-wrap">
+                  <label>Phone</label>
+                  <input type="tel" id="f-phone" placeholder="+1 (555) 000-0000" oninput="updatePreview()" class="form-input">
+                </div>
+              </div>
+              <div class="field-wrap">
+                <label>Address</label>
+                <input type="text" id="f-address" placeholder="New York, NY, USA" oninput="updatePreview()" class="form-input">
+              </div>
+              <div class="field-wrap">
+                <label>LinkedIn / Website</label>
+                <input type="text" id="f-linkedin" placeholder="linkedin.com/in/yourname" oninput="updatePreview()" class="form-input">
+              </div>
+              <div class="field-wrap">
+                <label>Profile Photo URL (optional)</label>
+                <input type="text" id="f-photo" placeholder="https://..." oninput="updatePreview()" class="form-input">
+                <input type="file" id="f-photo-file" accept="image/*" onchange="handlePhotoUpload(event)" class="form-input" style="margin-top:6px">
+              </div>
+            </div>
+          </div>
+
+          <!-- Career Objective -->
+          <div class="form-group" data-section="objective">
+            <div class="form-group-header">
+              <span>🎯 Career Objective</span>
+              <div class="header-actions">
+                <button class="ai-btn" onclick="generateAIObjective()">🤖 AI Generate</button>
+                <button class="toggle-section-btn" onclick="toggleSection('objective')">−</button>
+              </div>
+            </div>
+            <div class="form-group-body" id="section-objective">
+              <textarea id="f-objective" placeholder="A results-driven professional with 5+ years of experience..." oninput="updatePreview()" class="form-textarea" rows="4"></textarea>
+            </div>
+          </div>
+
+          <!-- Experience -->
+          <div class="form-group" data-section="experience">
+            <div class="form-group-header">
+              <span>💼 Experience</span>
+              <div class="header-actions">
+                <button class="add-entry-btn" onclick="addEntry('experience')">+ Add</button>
+                <button class="toggle-section-btn" onclick="toggleSection('experience')">−</button>
+              </div>
+            </div>
+            <div class="form-group-body" id="section-experience">
+              <div id="experience-entries"></div>
+            </div>
+          </div>
+
+          <!-- Education -->
+          <div class="form-group" data-section="education">
+            <div class="form-group-header">
+              <span>🎓 Education</span>
+              <div class="header-actions">
+                <button class="add-entry-btn" onclick="addEntry('education')">+ Add</button>
+                <button class="toggle-section-btn" onclick="toggleSection('education')">−</button>
+              </div>
+            </div>
+            <div class="form-group-body" id="section-education">
+              <div id="education-entries"></div>
+            </div>
+          </div>
+
+          <!-- Skills -->
+          <div class="form-group" data-section="skills">
+            <div class="form-group-header">
+              <span>⚡ Skills</span>
+              <div class="header-actions">
+                <button class="ai-btn" onclick="generateAISkills()">🤖 AI Suggest</button>
+                <button class="toggle-section-btn" onclick="toggleSection('skills')">−</button>
+              </div>
+            </div>
+            <div class="form-group-body" id="section-skills">
+              <textarea id="f-skills" placeholder="Figma, React, TypeScript, User Research, Prototyping, Agile..." oninput="updatePreview()" class="form-textarea" rows="3"></textarea>
+              <p class="hint">Comma-separated list of skills</p>
+            </div>
+          </div>
+
+          <!-- Certifications -->
+          <div class="form-group" data-section="certifications">
+            <div class="form-group-header">
+              <span>🏆 Certifications</span>
+              <div class="header-actions">
+                <button class="add-entry-btn" onclick="addEntry('certifications')">+ Add</button>
+                <button class="toggle-section-btn" onclick="toggleSection('certifications')">−</button>
+              </div>
+            </div>
+            <div class="form-group-body" id="section-certifications">
+              <div id="certifications-entries"></div>
+            </div>
+          </div>
+
+          <!-- Languages -->
+          <div class="form-group" data-section="languages">
+            <div class="form-group-header">
+              <span>🌍 Languages</span>
+              <button class="toggle-section-btn" onclick="toggleSection('languages')">−</button>
+            </div>
+            <div class="form-group-body" id="section-languages">
+              <textarea id="f-languages" placeholder="English (Native), Spanish (Fluent), French (Intermediate)..." oninput="updatePreview()" class="form-textarea" rows="2"></textarea>
+            </div>
+          </div>
+
+          <!-- Achievements -->
+          <div class="form-group" data-section="achievements">
+            <div class="form-group-header">
+              <span>🌟 Achievements</span>
+              <button class="toggle-section-btn" onclick="toggleSection('achievements')">−</button>
+            </div>
+            <div class="form-group-body" id="section-achievements">
+              <textarea id="f-achievements" placeholder="• Led redesign that increased user engagement by 47%&#10;• Speaker at Design Conference 2024..." oninput="updatePreview()" class="form-textarea" rows="4"></textarea>
+            </div>
+          </div>
+
+          <!-- References -->
+          <div class="form-group" data-section="references">
+            <div class="form-group-header">
+              <span>📋 References</span>
+              <div class="header-actions">
+                <button class="add-entry-btn" onclick="addEntry('references')">+ Add</button>
+                <button class="toggle-section-btn" onclick="toggleSection('references')">−</button>
+              </div>
+            </div>
+            <div class="form-group-body" id="section-references">
+              <div id="references-entries"></div>
+            </div>
+          </div>
+
+          <!-- Interests -->
+          <div class="form-group" data-section="interests">
+            <div class="form-group-header">
+              <span>❤ Interests & Hobbies</span>
+              <button class="toggle-section-btn" onclick="toggleSection('interests')">−</button>
+            </div>
+            <div class="form-group-body" id="section-interests">
+              <textarea id="f-interests" placeholder="Photography, Open-source, Rock climbing, Cooking..." oninput="updatePreview()" class="form-textarea" rows="2"></textarea>
+            </div>
+          </div>
+
+        </div><!-- end form-sections -->
+
+        <!-- Add Custom Section -->
+        <div class="add-section-wrap">
+          <button class="add-section-btn" onclick="addCustomSection()">➕ Add Custom Section</button>
+        </div>
+
+      </div><!-- end editor-left -->
+
+      <!-- RIGHT PANEL: Preview -->
+      <div class="editor-right" id="editorRight">
+        <div class="preview-wrapper">
+          <div class="preview-toolbar">
+            <span class="preview-label">Live Preview — A4</span>
+            <div class="zoom-controls">
+              <button onclick="adjustZoom(-0.1)">−</button>
+              <span id="zoomLevel">85%</span>
+              <button onclick="adjustZoom(0.1)">+</button>
+            </div>
+          </div>
+          <div class="preview-scaler" id="previewScaler">
+            <div class="cv-document" id="cvDocument">
+              <!-- CV content rendered here by JS -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end editor-body -->
+
+  </div>
+</div>
+
+<!-- ===== AI MODAL ===== -->
+<div id="aiModal" class="modal-overlay">
+  <div class="ai-modal">
+    <div class="ai-modal-header">
+      <h3>🤖 AI Writing Assistant</h3>
+      <button onclick="closeAIModal()">✕</button>
+    </div>
+    <div class="ai-modal-body">
+      <div class="ai-prompt-area">
+        <label>Tell AI about yourself:</label>
+        <textarea id="aiContext" placeholder="e.g. I'm a software engineer with 3 years in fintech, skilled in Python and React, looking for senior roles..." rows="4" class="form-textarea"></textarea>
+      </div>
+      <div class="ai-options">
+        <button class="ai-option-btn active" onclick="selectAIOption(this,'objective')">Career Objective</button>
+        <button class="ai-option-btn" onclick="selectAIOption(this,'skills')">Skills List</button>
+        <button class="ai-option-btn" onclick="selectAIOption(this,'experience')">Experience Bullets</button>
+        <button class="ai-option-btn" onclick="selectAIOption(this,'summary')">Professional Summary</button>
+      </div>
+      <button class="btn-primary" onclick="runAI()" id="aiRunBtn">Generate with AI →</button>
+      <div class="ai-output" id="aiOutput" style="display:none">
+        <div class="ai-output-header">
+          <span>AI Generated Content:</span>
+          <button onclick="applyAIOutput()">✓ Apply to CV</button>
+        </div>
+        <div id="aiOutputText" class="ai-output-text"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== TOAST ===== -->
+<div class="toast" id="toast"></div>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer" id="mainFooter">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="nav-logo">
+        <span class="logo-icon">◈</span>
+        <span>CVCraft<em>Pro</em></span>
+      </div>
+      <p>AI-powered resume building for the modern professional.</p>
+    </div>
+    <div class="footer-links">
+      <div class="footer-col">
+        <h4>Product</h4>
+        <a href="#" onclick="showPage('home')">Templates</a>
+        <a href="#" onclick="showPage('trending')">Trending</a>
+        <a href="#" onclick="showPage('special')">Special</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="#" onclick="showPage('about')">About</a>
+        <a href="#" onclick="showPage('contact')">Contact</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 CVCraft Pro. All rights reserved. Built with ❤ for job seekers worldwide.</p>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
